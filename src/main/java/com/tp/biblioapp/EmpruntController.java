@@ -49,6 +49,13 @@ public Emprunt addEmprunt(@RequestBody Emprunt emprunt) {
    return empruntRepository.save(emprunt);
 }
 
+
+    @PostMapping("emprunt/creates")
+    public List<Emprunt> addEmprunts(@RequestBody List<Emprunt> emprunts) {
+        return empruntRepository.saveAll(emprunts);
+    }
+
+
 @PutMapping(value =  "emprunt/update/{empruntId}")
 public Emprunt updateEmprunt(@PathVariable String empruntId, @RequestBody Emprunt emprunt) {
    logger.info("Updating emprunt with ID: {}", empruntId);
@@ -60,6 +67,12 @@ public void deleteEmprunt(@PathVariable String empruntId) {
    logger.info("Deleting emprunt with ID: {}", empruntId);
    empruntRepository.deleteById(empruntId);
 }
+
+    @GetMapping("/emprunt/search/user/{utilisateur}")
+    public List<Emprunt> searchByUtilisateur(@PathVariable String utilisateur) {
+        return empruntRepository.findByUtilisateur(utilisateur);
+    }
+
 
 
 }

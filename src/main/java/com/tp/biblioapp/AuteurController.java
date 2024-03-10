@@ -37,11 +37,18 @@ public Auteur getAuteurById(@PathVariable String auteurId) {
    return auteurRepository.findAuteurById(auteurId);
 }
 
-@PostMapping(value = "auteur/create")
+//@PostMapping(value = "auteur/create")
+@PostMapping({"auteur/create", "/auteur/create"})
 public Auteur addAuteur(@RequestBody Auteur auteur) {
    logger.info("Saving auteur.");
    return auteurRepository.save(auteur);
 }
+
+    @PostMapping("auteur/creates")
+    public List<Auteur> addAuteurs(@RequestBody List<Auteur> auteurs) {
+        return auteurRepository.saveAll(auteurs);
+    }
+
 
 @PutMapping(value = "auteur/update/{auteurId}")
 public Auteur updateAuteur(@PathVariable String auteurId, @RequestBody Auteur auteur) {

@@ -2,6 +2,7 @@ package com.tp.biblioapp;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import java.util.List;
 
 @Document
 public class Auteur {
@@ -11,7 +12,7 @@ public class Auteur {
   private String id;
   private String nom;
   private String nationalite;
-  private String livresPublie;
+  private List <String> livresPublie;
 
 
 
@@ -29,9 +30,10 @@ public class Auteur {
 
   public void setNationalite(String nationalite) {this.nationalite = nationalite;}
 
-  public String getLivresPublie() {return livresPublie;}
+  public List <String> getLivresPublie() {return livresPublie;}
 
-  public void setLivresPublie(String livresPublie) {this.livresPublie = livresPublie;}
+  public void setLivresPublie(List <String> livresPublie) {this.livresPublie = livresPublie;}
+  
 
 }
 
