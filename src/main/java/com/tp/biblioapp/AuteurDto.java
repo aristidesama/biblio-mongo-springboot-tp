@@ -1,21 +1,18 @@
 package com.tp.biblioapp;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
-@Document
-public class Auteur {
+public class AuteurDto {
 
 
-  @Id
   private String id;
   private String nom;
   private String nationalite;
   private List <String> livresPublie;
 
 
-  public Auteur() {}
+
+  public AuteurDto() {}
 
   public String getId() {return id;}
 
@@ -35,4 +32,5 @@ public class Auteur {
   
 
 }
+
 

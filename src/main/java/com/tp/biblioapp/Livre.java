@@ -15,6 +15,7 @@ public class Livre {
   private String anneePublication;
   private List <String> genres;
   private String quantiteDispo;
+  //private int quantiteDispo;
 
 
 
@@ -41,8 +42,10 @@ public class Livre {
   public void setAnneePublication(String anneePublication) {this.anneePublication = anneePublication;}
 
   public String getQuantiteDispo() {return quantiteDispo;}
+  //public int getQuantiteDispo() {return quantiteDispo;}
 
   public void setQuantiteDispo(String quantiteDispo) {this.quantiteDispo = quantiteDispo;}
+  //public void setQuantiteDispo(int quantiteDispo) {this.quantiteDispo = quantiteDispo;}
 
 }
 

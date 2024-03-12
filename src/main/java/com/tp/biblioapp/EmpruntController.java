@@ -18,6 +18,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+import java.util.Map;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.query.Criteria;
 
 
 @RestController
@@ -62,18 +68,51 @@ public Emprunt updateEmprunt(@PathVariable String empruntId, @RequestBody Emprun
    return empruntRepository.save(emprunt);
 }
 
+
 @DeleteMapping(value =  "emprunt/delete/{empruntId}")
-public void deleteEmprunt(@PathVariable String empruntId) {
+public ResponseEntity<?> deleteEmprunt(@PathVariable String empruntId) {
    logger.info("Deleting emprunt with ID: {}", empruntId);
-   empruntRepository.deleteById(empruntId);
+
+    Emprunt existingEmprunt = empruntRepository.findEmpruntById(empruntId);
+    if (existingEmprunt == null) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La base ne contient pas d'Emprunt avec l'id : " + empruntId);
+    }else {
+      empruntRepository.deleteById(empruntId);
+    }
+
+   return ResponseEntity.status(HttpStatus.OK).body("Emprunt supprimé avec succès.");
 }
+
 
     @GetMapping("/emprunt/search/user/{utilisateur}")
     public List<Emprunt> searchByUtilisateur(@PathVariable String utilisateur) {
         return empruntRepository.findByUtilisateur(utilisateur);
     }
 
+/*
+    @GetMapping("/emprunt/aggregated")
+    public ResponseEntity<?> aggregateEmprunts(
+            @RequestParam("date_periode_debut") String datePeriodeDebut,
+            @RequestParam("date_periode_fin") String datePeriodeFin) {
+        
+        List<EmpruntAggregationResult> results = empruntRepository.aggregateEmprunts(datePeriodeDebut, datePeriodeFin);
+        return ResponseEntity.ok(results);
+    }*/
 
+    @GetMapping("emprunt/statistics/")
+    public List<Map> getEmpruntStatistics() {
+        List<Map> result = mongoTemplate.aggregate(
+            Aggregation.newAggregation(
+                Aggregation.match(Criteria.where("dateEmp").gte("2024-03-02").lt("2024-03-30")),
+                Aggregation.group("dateEmp").count().as("totalLivresEmpruntes"),
+                Aggregation.sort(Sort.by("dateEmp"))
+            ),
+            Emprunt.class,
+            Map.class
+        ).getMappedResults();
+
+        return result;
+    }
 
 }
 

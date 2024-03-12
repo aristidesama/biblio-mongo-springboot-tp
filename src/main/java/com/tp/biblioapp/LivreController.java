@@ -13,13 +13,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.data.mongodb.core.query.TextCriteria;
+import org.springframework.data.mongodb.core.query.TextQuery;
+
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -64,11 +69,40 @@ public Livre updateLivre(@PathVariable String livreId, @RequestBody Livre livre)
    return livreRepository.save(livre);
 }
 
+    @PatchMapping("livre/decreaseQty/{titre}")
+    public Livre decreaseQuantity(@PathVariable String titre) {
+        Livre livre = livreRepository.findByTitre(titre);
+        if (livre != null) {
+	  String quantityInString = livre.getQuantiteDispo();
+	  int quantityInNumeric = Integer.parseInt(quantityInString);
+          int newQty = quantityInNumeric - 1;
+            livre.setQuantiteDispo(String.valueOf(newQty));
+            livreRepository.save(livre);
+        }
+	return livre;
+    }
+
+
 @DeleteMapping(value =  "livre/delete/{livreId}")
 public void deleteLivre(@PathVariable String livreId) {
    logger.info("Deleting livre with ID: {}", livreId);
    livreRepository.deleteById(livreId);
 }
+
+@DeleteMapping(value =  "livre/deleteByTitre/{titre}")
+public ResponseEntity<?> deleteLivreByTitre(@PathVariable String titre) {
+   logger.info("Deleting livre with title : {}", titre);
+
+    Livre existingLivre = livreRepository.findByTitre(titre);
+    if (existingLivre == null) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La base ne contient pas de Livre du titre : " + titre);
+    }else {
+      livreRepository.deleteById(existingLivre.getId());
+    }
+
+   return ResponseEntity.status(HttpStatus.OK).body("Suppression avec succès du livre : " + titre);
+}
+
 
 //-------------SPECIALS-----------
 
@@ -104,6 +138,14 @@ public void deleteLivre(@PathVariable String livreId) {
     @GetMapping("/livre/search/auteur/{auteurs}")
     public List<Livre> searchByAuteurs(@PathVariable String auteurs) {
         return livreRepository.findByAuteurs(auteurs);
+    }
+
+    @GetMapping("livre/search/text")
+    public List<Livre> searchLivreByTitle(@RequestParam String keyword) {
+        return mongoTemplate.find(
+            TextQuery.queryText(new TextCriteria().matchingAny(keyword)).sortByScore(),
+            Livre.class
+        );
     }
 
 }

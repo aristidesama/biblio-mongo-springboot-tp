@@ -9,6 +9,7 @@ public interface LivreRepository extends MongoRepository<Livre, String> {
  Livre findLivreById(String livreId);
  List<Livre> findByGenres(String genres);
  List<Livre> findByAuteurs(String auteurs);
+ Livre findByTitre(String titre);
 
 }
 

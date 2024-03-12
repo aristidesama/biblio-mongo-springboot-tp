@@ -17,6 +17,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 
 @RestController
 public class AuteurController{
@@ -56,11 +58,45 @@ public Auteur updateAuteur(@PathVariable String auteurId, @RequestBody Auteur au
    return auteurRepository.save(auteur);
 }
 
+@PutMapping("auteur/updateSomeInfo/{nom}")
+public ResponseEntity<?> updateAuteur(@PathVariable String nom, @RequestBody AuteurDto auteurDto) {
+
+    Auteur existingAuteur = auteurRepository.findByNom(nom).orElse(null);
+    if (existingAuteur == null) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Auteur not found with name: " + nom);
+    }
+
+    // Mettre à jour les champs de l'auteur avec les valeurs fournies dans le DTO
+    existingAuteur.setNom(auteurDto.getNom());
+    existingAuteur.setNationalite(auteurDto.getNationalite());
+    existingAuteur.setLivresPublie(auteurDto.getLivresPublie());
+
+    Auteur updatedAuteur = auteurRepository.save(existingAuteur);
+    return ResponseEntity.ok(updatedAuteur);
+}
+
 @DeleteMapping(value = "auteur/delete/{auteurId}")
 public void deleteAuteur(@PathVariable String auteurId) {
    logger.info("Deleting auteur with ID: {}", auteurId);
    auteurRepository.deleteById(auteurId);
 }
+
+@DeleteMapping(value =  "auteur/deleteByNom/{nom}")
+public ResponseEntity<?> deleteAuteurByNom(@PathVariable String nom) {
+   logger.info("Deleting auteur with title : {}", nom);
+
+    Auteur existingAuteur = auteurRepository.findByNom(nom).orElse(null);
+    //Auteur existingAuteur = auteurRepository.findByNom(nom);
+    if (existingAuteur == null) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La base ne contient pas un Auteur du nom : " + nom);
+    }else {
+      auteurRepository.deleteById(existingAuteur.getId());
+    }
+
+   return ResponseEntity.status(HttpStatus.OK).body("Suppression avec succès de l'auteur : " + nom);
+}
+
+
 
 
 }

@@ -183,7 +183,7 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 16 - ((15 * winheight(0) + 18) / 36)
+let s:l = 16 - ((15 * winheight(0) + 17) / 35)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -322,7 +322,7 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 18) / 36)
+let s:l = 1 - ((0 * winheight(0) + 17) / 35)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -461,7 +461,7 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 31 - ((25 * winheight(0) + 18) / 36)
+let s:l = 31 - ((24 * winheight(0) + 17) / 35)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -485,11 +485,11 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe '1resize ' . ((&lines * 17 + 19) / 38)
-exe 'vert 1resize ' . ((&columns * 77 + 77) / 155)
-exe '2resize ' . ((&lines * 17 + 19) / 38)
-exe 'vert 2resize ' . ((&columns * 77 + 77) / 155)
-exe 'vert 3resize ' . ((&columns * 77 + 77) / 155)
+exe '1resize ' . ((&lines * 16 + 18) / 37)
+exe 'vert 1resize ' . ((&columns * 62 + 63) / 126)
+exe '2resize ' . ((&lines * 17 + 18) / 37)
+exe 'vert 2resize ' . ((&columns * 62 + 63) / 126)
+exe 'vert 3resize ' . ((&columns * 63 + 63) / 126)
 argglobal
 setlocal keymap=
 setlocal noarabic
@@ -613,12 +613,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 77 - ((11 * winheight(0) + 8) / 17)
+let s:l = 26 - ((6 * winheight(0) + 8) / 16)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-77
-normal! 033|
+26
+normal! 0
 wincmd w
 argglobal
 if bufexists("LivreRepository.java") | buffer LivreRepository.java | else | edit LivreRepository.java | endif
@@ -875,18 +875,18 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 6 - ((5 * winheight(0) + 17) / 35)
+let s:l = 6 - ((5 * winheight(0) + 17) / 34)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 6
 normal! 0
 wincmd w
-exe '1resize ' . ((&lines * 17 + 19) / 38)
-exe 'vert 1resize ' . ((&columns * 77 + 77) / 155)
-exe '2resize ' . ((&lines * 17 + 19) / 38)
-exe 'vert 2resize ' . ((&columns * 77 + 77) / 155)
-exe 'vert 3resize ' . ((&columns * 77 + 77) / 155)
+exe '1resize ' . ((&lines * 16 + 18) / 37)
+exe 'vert 1resize ' . ((&columns * 62 + 63) / 126)
+exe '2resize ' . ((&lines * 17 + 18) / 37)
+exe 'vert 2resize ' . ((&columns * 62 + 63) / 126)
+exe 'vert 3resize ' . ((&columns * 63 + 63) / 126)
 tabnext
 edit EmpruntController.java
 set splitbelow splitright
@@ -905,11 +905,11 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe '1resize ' . ((&lines * 27 + 19) / 38)
-exe 'vert 1resize ' . ((&columns * 76 + 77) / 155)
-exe '2resize ' . ((&lines * 7 + 19) / 38)
-exe 'vert 2resize ' . ((&columns * 76 + 77) / 155)
-exe 'vert 3resize ' . ((&columns * 78 + 77) / 155)
+exe '1resize ' . ((&lines * 26 + 18) / 37)
+exe 'vert 1resize ' . ((&columns * 62 + 63) / 126)
+exe '2resize ' . ((&lines * 7 + 18) / 37)
+exe 'vert 2resize ' . ((&columns * 62 + 63) / 126)
+exe 'vert 3resize ' . ((&columns * 63 + 63) / 126)
 argglobal
 setlocal keymap=
 setlocal noarabic
@@ -1033,12 +1033,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 67 - ((25 * winheight(0) + 13) / 27)
+let s:l = 106 - ((11 * winheight(0) + 13) / 26)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-67
-normal! 0
+106
+normal! 092|
 wincmd w
 argglobal
 if bufexists("EmpruntRepository.java") | buffer EmpruntRepository.java | else | edit EmpruntRepository.java | endif
@@ -1164,11 +1164,11 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 6 - ((3 * winheight(0) + 3) / 7)
+let s:l = 9 - ((2 * winheight(0) + 3) / 7)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-6
+9
 normal! 02|
 wincmd w
 argglobal
@@ -1295,18 +1295,18 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 21 - ((5 * winheight(0) + 17) / 35)
+let s:l = 59 - ((21 * winheight(0) + 17) / 34)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-21
-normal! 03|
+59
+normal! 071|
 wincmd w
-exe '1resize ' . ((&lines * 27 + 19) / 38)
-exe 'vert 1resize ' . ((&columns * 76 + 77) / 155)
-exe '2resize ' . ((&lines * 7 + 19) / 38)
-exe 'vert 2resize ' . ((&columns * 76 + 77) / 155)
-exe 'vert 3resize ' . ((&columns * 78 + 77) / 155)
+exe '1resize ' . ((&lines * 26 + 18) / 37)
+exe 'vert 1resize ' . ((&columns * 62 + 63) / 126)
+exe '2resize ' . ((&lines * 7 + 18) / 37)
+exe 'vert 2resize ' . ((&columns * 62 + 63) / 126)
+exe 'vert 3resize ' . ((&columns * 63 + 63) / 126)
 tabnext
 edit ../../../../resources/application.properties
 set splitbelow splitright
@@ -1440,7 +1440,7 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 5 - ((4 * winheight(0) + 18) / 36)
+let s:l = 5 - ((4 * winheight(0) + 17) / 35)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -1579,25 +1579,25 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 9 - ((8 * winheight(0) + 18) / 36)
+let s:l = 9 - ((8 * winheight(0) + 17) / 35)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 9
 normal! 02|
-tabnext 5
+tabnext 4
 set stal=1
-badd +0 Auteur.java
+badd +1 Auteur.java
 badd +1 AuteurRepository.java
 badd +1 AuteurController.java
+badd +1 LivreController.java
+badd +27 EmpruntController.java
 badd +1 ../../../../resources/application.properties
 badd +1 DemoApplication.java
-badd +0 Livre.java
-badd +0 LivreRepository.java
-badd +0 LivreController.java
-badd +0 Emprunt.java
-badd +0 EmpruntRepository.java
-badd +0 EmpruntController.java
+badd +1 LivreRepository.java
+badd +1 Livre.java
+badd +1 EmpruntRepository.java
+badd +1 Emprunt.java
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif
