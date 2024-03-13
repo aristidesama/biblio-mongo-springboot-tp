@@ -30,7 +30,12 @@ javac 17.0.10
 
 > db.createUser({ user: "root",pwd:  "root", roles: [ { role: "readWrite", db: "biblioTp" }]})
 
-* Back to your system shell prompt
+## Next step is to download the file "biblioapp-0.0.1-SNAPSHOT.jar" from this github root repository to your local computer.
+
+* Back to your operating system shell prompt
 
 > java -jar biblioapp-0.0.1-SNAPSHOT.jar
 
+## From this time onward you can open your Postman and go to http://127.0.0.1:8080/
+
+* Then follow  instructions bit by bit, with the help of the CRUD exercise and testrun this Api.
